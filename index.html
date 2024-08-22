@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo List</title>
+    <title>taskMaster</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js" integrity="sha512-dlPw+ytv/6JyepmelABrgeYgHI0O+frEwgfnPdXDTOIZz+eDgfW07QXG02/O8COfivBdGNINy+Vex+lYmJ5rxw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <link rel="icon" href="./logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://unpkg.com/papercss@1.9.2/dist/paper.min.css"/> -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/papercss@1.9.2/dist/paper.min.css"
+  />
 </head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-6Y2XVLLGTX"></script>
@@ -15,20 +30,115 @@
 
   gtag('config', 'G-6Y2XVLLGTX');
 </script>
-<body>
+<body id="body">
     <div class="flex-col">
-        <h1>Task Master</h1>
+        <h1 class="heading">Task Master</h1>
         <div>
             <input type="text" id="todo-input" placeholder="Enter a new task">
             <button id="add-button">Add</button>
         </div>
-        <div>
-            <svg width="20px" heigth="20px" style="cursor:pointer"; xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M352 224c53 0 96-43 96-96s-43-96-96-96s-96 43-96 96c0 4 .2 8 .7 11.9l-94.1 47C145.4 170.2 121.9 160 96 160c-53 0-96 43-96 96s43 96 96 96c25.9 0 49.4-10.2 66.6-26.9l94.1 47c-.5 3.9-.7 7.8-.7 11.9c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-25.9 0-49.4 10.2-66.6 26.9l-94.1-47c.5-3.9 .7-7.8 .7-11.9s-.2-8-.7-11.9l94.1-47C302.6 213.8 326.1 224 352 224z"/></svg>
-
+        <div class="share-icon-wrapper" >
+            <div>
+                <!-- <span id="download" title="Export as excel" (click)="download()">
+                    <svg class="pointer" width="20px" heigth="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></svg>
+                </span> -->
+                <span title="Share tasks" id="share">
+                    <svg class="pointer" width="20px" heigth="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M352 224c53 0 96-43 96-96s-43-96-96-96s-96 43-96 96c0 4 .2 8 .7 11.9l-94.1 47C145.4 170.2 121.9 160 96 160c-53 0-96 43-96 96s43 96 96 96c25.9 0 49.4-10.2 66.6-26.9l94.1 47c-.5 3.9-.7 7.8-.7 11.9c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-25.9 0-49.4 10.2-66.6 26.9l-94.1-47c.5-3.9 .7-7.8 .7-11.9s-.2-8-.7-11.9l94.1-47C302.6 213.8 326.1 224 352 224z"/></svg>
+                </span>
+            </div>
         </div>  
     </div>
 
+    
+    <div class="row flex-spaces alertbox">
+        <input class="alert-state" id="alert-5" type="checkbox">
+        <div class="alert alert-danger dismissible">
+          Task already exists
+          <label class="btn-close" for="alert-5">X</label>
+        </div>
+    </div>
+
+
     <div id="todo-lists"></div>
+
+    <div class="tagline">
+        <h1>A simple and easy to use productivity tool</h1>
+    </div>  
+
+    <div class="col flex-spaces navigation" id="navigation">
+        <div data-action='home' class="sm-3 col border border-primary">Home</div>
+        <div data-action='today' class="sm-3 col border border-2 border-primary highlight">Today</div>
+        <div data-action='history' class="sm-3 col border border-3 border-primary">History</div>
+    </div>
+
+
+    <div onClick="cancelModal(event)" id="modal">
+        <div id="modal-container">
+            <div onClick="saveModal()" id="model-body" class="border border-primary">
+                <label class="btn-close" id="btn-close" onClick="cancelModal(event, true)" style="float: right">X</label>
+                <div id="modal-content">
+                    <p contenteditable style="text-decoration: underline;" id="modal_task"></p>
+                    <textarea id='task-desc' 
+                    placeholder="Task description goes here
+1. Put the ideas here related to the task
+2. Write a short summary
+3. Write observation "></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="index.js"></script>
+
+    <style>
+        input{
+            display: inline;
+        }
+        h1{
+            font-size: 3rem;
+        }
+        h2{
+            font-size:2rem;
+        }
+        .celebration, .celebration-left {
+            /* display: none; */
+            position: fixed;
+            bottom: 0;
+            right: 0;
+        }
+
+        .celebration-left{
+            left: 0;
+        }
+
+        .alertbox{
+            display: none;
+        }
+        .navigation{
+            position: fixed;
+            top: 5%;
+            left: 0;
+            padding: 2px;
+        }
+        .navigation div{
+            max-width: none;
+            cursor: pointer;
+            padding: 2px;
+            margin-top: 2px;
+        }
+
+        .heading {
+            margin-top: 0;
+        }
+
+        .btn-close {
+            cursor: pointer;
+            margin-top: -5px;
+        }
+
+        [contenteditable]{
+            outline: none;
+        }
+    </style>
 </body>
 </html>

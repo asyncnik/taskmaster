@@ -1,22 +1,40 @@
-body {
-    font-family: Arial, sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+#body {
+    /* font-family: 'Rubik'; */
+    font-family: 'Patrick Hand SC';
     max-width: 600px;
-    margin: 0 auto;
+    margin: auto;
     padding: 20px;
+    background-color: rgba(229, 231, 235, 0.4);
+}
+
+input{
+    display: inline;
+}
+input::placeholder {
+    font-family: 'Patrick Hand SC';
+}
+button {
+    font-family: "Rubik";
 }
 h1, h2 {
     text-align: center;
+    font-weight: 400;
+    font-size: 3rem;
 }
 h2 {
     margin-top: 20px;
     background-color: #f0f0f0;
     padding: 10px;
+    border: 1px solid #D3D3D3;
     border-radius: 5px;
 }
 #todo-input {
     width: 70%;
     padding: 5px;
     font-size: 16px;
+    width: 300px;
 }
 #input-box {
     display: flex;
@@ -32,11 +50,21 @@ h2 {
 #add-button {
     padding: 5px 10px;
     font-size: 16px;
-    background-color: #4CAF50;
-    color: white;
+    background-color: #E0A82E;
+    color: black;
     border: none;
     cursor: pointer;
+    border: 2px solid #E0A82E;
+    border-radius: 4px;
 }
+
+input:focus{
+    outline: none;
+    outline: 2px solid #E0A82E;
+    border: none;
+    /* border-radius::outline: 4px; */
+}
+
 ul {
     list-style-type: none;
     padding: 0;
@@ -48,6 +76,7 @@ li {
     background-color: #f2f2f2;
     margin-bottom: 5px;
     border-radius: 3px;
+    border: 1px solid #d3d3d3;
 }
 .todo-text {
     flex-grow: 1;
@@ -67,3 +96,89 @@ li {
 .complete-btn {
     color: green;
 }
+.share-icon-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content:flex-end;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+#modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(140, 140, 140, 0.7);
+}
+
+#modal-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#modal-content {
+    height: 100%;
+}
+
+#modal-content p {
+    font-weight: bold;
+}
+
+#model-body {
+    /* padding: 15%;     */
+    padding: 10px;
+    background: white;
+    opacity: 1;
+    /* border-radius: 4px; */
+    height: 80%;
+    width: 70%;
+    border: 2px solid #41403e;
+    /* border-radius: none; */
+    /* box-shadow: 2px 2px 2px 2px; */
+}
+
+#model-body textarea {
+    width: 80%;
+    border: none;
+    height: 80%;
+    border: 1px solid #d3d3d3;
+}
+
+.tagline {
+    font-size: 2em;
+}
+
+.highlight{
+    background-color: #E0A82E;
+    font-weight: bolder;
+}
+
+
+.rubik-33> {
+    font-family: "Rubik", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+
+  ::-webkit-scrollbar {
+    width: 12px;
+    color: #d3d3d3;
+}
+
+::-webkit-scrollbar-track {
+    display: none;
+}
+
+  /* scrollbar */
+/* width */

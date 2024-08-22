@@ -1,1 +1,1 @@
-A productive software
+A productivity software
